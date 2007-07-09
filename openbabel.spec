@@ -1,5 +1,5 @@
-%define version 2.1.0
-%define release %mkrel 2
+%define version 2.1.1
+%define release %mkrel 1
 
 %define major 	2
 %define libname %mklibname %{name}
@@ -14,7 +14,7 @@ BuildRoot: 	%{_tmppath}/%{name}-%{version}-buildroot
 URL: 		http://openbabel.sourceforge.net/
 Source: 	%{name}-%{version}.tar.bz2
 
-BuildRequires:	doxygen
+BuildRequires:	doxygen wxGTK-devel
 Requires:	%{libname}%{major} = %{version}
 
 %description
