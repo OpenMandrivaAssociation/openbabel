@@ -10,7 +10,6 @@ Version: 	%{version}
 Release: 	%{release}
 License: 	GPL
 Group: 		Sciences/Chemistry
-BuildRoot: 	%{_tmppath}/%{name}-%{version}-buildroot
 URL: 		http://openbabel.sourceforge.net/
 Source: 	%{name}-%{version}.tar.bz2
 
