@@ -1,5 +1,5 @@
-%define version 2.1.1
-%define release %mkrel 1
+%define version 2.2.0
+%define release %mkrel 0.b4.1
 
 %define major 	2
 %define libname %mklibname %{name}
@@ -12,8 +12,8 @@ License: 	GPL
 Group: 		Sciences/Chemistry
 BuildRoot: 	%{_tmppath}/%{name}-%{version}-buildroot
 URL: 		http://openbabel.sourceforge.net/
-Source: 	%{name}-%{version}.tar.bz2
-
+#Source: 	%{name}-%{version}.tar.bz2
+Source:     %{name}-%{version}b4-20080301-r2299.tar.gz
 BuildRequires:	doxygen wxGTK-devel
 Requires:	%{libname}%{major} = %{version}
 
@@ -67,7 +67,7 @@ chemistry.
 This package contains static library of %{name}.
 
 %prep
-%setup -q
+%setup -q -n %{name}-%{version}b4
 
 %build
 %configure2_5x --enable-doxygen --enable-shared
