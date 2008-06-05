@@ -1,21 +1,19 @@
-%define version 2.2.0
-%define release %mkrel 0.b4.1
-
-%define major 	2
+%define major 2
 %define libname %mklibname %{name}
 
-Summary: 	Chemistry software file format converter
-Name: 		openbabel
-Version: 	%{version}
-Release: 	%{release}
-License: 	GPL
-Group: 		Sciences/Chemistry
-BuildRoot: 	%{_tmppath}/%{name}-%{version}-buildroot
-URL: 		http://openbabel.sourceforge.net/
+Name: openbabel
+Version: 2.2.0
+Release: %mkrel 0.b5.1
+Summary: Chemistry software file format converter
+License: GPL
+Group: Sciences/Chemistry
+BuildRoot: %{_tmppath}/%{name}-%{version}-buildroot
+URL: http://openbabel.sourceforge.net/
 #Source: 	%{name}-%{version}.tar.bz2
-Source:     %{name}-%{version}b4-20080301-r2299.tar.gz
-BuildRequires:	doxygen wxGTK-devel
-Requires:	%{libname}%{major} = %{version}
+Source: %{name}-%{version}b5-20080517-r2469.tar.gz
+BuildRequires: doxygen 
+BuildRequires: wxGTK-devel
+Requires: %{libname}%{major} = %{version}
 
 %description
 Open Babel is a project designed to pick up where Babel left off, 
@@ -67,10 +65,12 @@ chemistry.
 This package contains static library of %{name}.
 
 %prep
-%setup -q -n %{name}-%{version}b4
+%setup -q -n %{name}-%{version}b5
 
 %build
-%configure2_5x --enable-doxygen --enable-shared
+%configure2_5x \
+	--enable-doxygen \
+	--enable-shared
 %make
 
 %install
