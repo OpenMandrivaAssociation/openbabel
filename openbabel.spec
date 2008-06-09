@@ -79,8 +79,12 @@ rm -rf %{buildroot}
 #install -d -m 0755 %{buildroot}%{_includedir}/openbabel/math
 #install -m 0644 src/math/*.h %{buildroot}%{_includedir}/openbabel/math/ 
 
+%if %mdkversion < 200900
 %post -n %{libname}%{major} -p /sbin/ldconfig
+%endif
+%if %mdkversion < 200900
 %postun -n %{libname}%{major} -p /sbin/ldconfig
+%endif
 
 %clean
 rm -rf %{buildroot}
