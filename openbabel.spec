@@ -1,19 +1,19 @@
-%define major 2
-%define libname %mklibname %{name}
+%define major 3
+%define libname %mklibname %{name} %{major}
+%define develname %mklibname %{name} -d
 
 Name: openbabel
 Version: 2.2.0
-Release: %mkrel 2.b5.1
+Release: %mkrel 1
 Summary: Chemistry software file format converter
-License: GPL
+License: GPLv2+
 Group: Sciences/Chemistry
 BuildRoot: %{_tmppath}/%{name}-%{version}-buildroot
 URL: http://openbabel.sourceforge.net/
-#Source: 	%{name}-%{version}.tar.bz2
-Source: %{name}-%{version}b5-20080517-r2469.tar.gz
+Source: %{name}-%{version}.tar.gz
 BuildRequires: doxygen 
 BuildRequires: wxGTK-devel
-Requires: %{libname}%{major} = %{version}
+Requires: %{libname} = %{version}
 
 %description
 Open Babel is a project designed to pick up where Babel left off, 
@@ -21,12 +21,12 @@ as a cross-platform program and library designed to interconvert
 between many file formats used in molecular modeling and computational
 chemistry.
 
-%package	-n %{libname}%{major}
+%package	-n %{libname}
 Summary:        Shared libraries of %{name}
 Group:          System/Libraries
-Provides:	%{libname} = %{version}-%{release}
+Provides:	%{name} = %{version}-%{release}
 
-%description	-n %{libname}%{major}
+%description	-n %{libname}
 Open Babel is a project designed to pick up where Babel left off, 
 as a cross-platform program and library designed to interconvert 
 between many file formats used in molecular modeling and computational
@@ -34,14 +34,13 @@ chemistry.
 
 This package contains shared libraries of %{name}.
 
-%package	-n %{libname}%{major}-devel
+%package	-n %{develname}
 Summary:        Development files of %{name}
 Group:          Development/C++
-Requires:	%{libname}%{major} = %{version}
+Requires:	%{libname} = %{version}
 Provides:       %{name}-devel = %{version}-%{release}
-Provides:       %{libname}-devel = %{version}-%{release}
 
-%description	-n %{libname}%{major}-devel
+%description	-n %{develname}
 Open Babel is a project designed to pick up where Babel left off, 
 as a cross-platform program and library designed to interconvert 
 between many file formats used in molecular modeling and computational
@@ -51,21 +50,21 @@ This package includes the header files and other development
 related files necessary for developing or compiling programs
 using the %{name} library.
 
-%package	-n %{libname}%{major}-static-devel
-Summary:        Static library of %{name}
-Group:          System/Libraries
-Requires:	%{libname}%{major}-devel = %{version}
+#%package	-n %{libname}%{major}-static-devel
+#Summary:        Static library of %{name}
+#Group:          System/Libraries
+#Requires:	%{libname}%{major}-devel = %{version}
 
-%description	-n %{libname}%{major}-static-devel
-Open Babel is a project designed to pick up where Babel left off, 
-as a cross-platform program and library designed to interconvert 
-between many file formats used in molecular modeling and computational
-chemistry.
+#%description	-n %{libname}%{major}-static-devel
+#Open Babel is a project designed to pick up where Babel left off, 
+#as a cross-platform program and library designed to interconvert 
+#between many file formats used in molecular modeling and computational
+#chemistry.
 
-This package contains static library of %{name}.
+#This package contains static library of %{name}.
 
 %prep
-%setup -q -n %{name}-%{version}b5
+%setup -q
 
 %build
 %configure2_5x \
@@ -76,14 +75,12 @@ This package contains static library of %{name}.
 %install
 rm -rf %{buildroot}
 %makeinstall_std
-#install -d -m 0755 %{buildroot}%{_includedir}/openbabel/math
-#install -m 0644 src/math/*.h %{buildroot}%{_includedir}/openbabel/math/ 
 
 %if %mdkversion < 200900
-%post -n %{libname}%{major} -p /sbin/ldconfig
+%post -n %{libname} -p /sbin/ldconfig
 %endif
 %if %mdkversion < 200900
-%postun -n %{libname}%{major} -p /sbin/ldconfig
+%postun -n %{libname} -p /sbin/ldconfig
 %endif
 
 %clean
@@ -97,20 +94,23 @@ rm -rf %{buildroot}
 %{_mandir}/man?/*
 %{_datadir}/%{name}
 
-%files -n %{libname}%{major}
+%files -n %{libname}
 %defattr(-, root, root)
-%{_libdir}/lib*.so.*
+%{_libdir}/lib*.so.%{major}
+%{_libdir}/lib*.so.%{major}.*
 
-%files -n %{libname}%{major}-devel
+%files -n %{develname}
 %defattr(-, root, root)
 %{_includedir}/*
 %{_libdir}/pkgconfig/*.pc
 %{_libdir}/lib*.so
 %{_libdir}/lib*.la
+%{_libdir}/%{name}/%{version}/*.so
+%{_libdir}/%{name}/%{version}/*.la
 
-%files -n %{libname}%{major}-static-devel
-%defattr(-, root, root)
-%{_libdir}/lib*.a
-%{_libdir}/%name
+#%files -n %{libname}%{major}-static-devel
+#%defattr(-, root, root)
+#%{_libdir}/lib*.a
+#%{_libdir}/%name
 
 
