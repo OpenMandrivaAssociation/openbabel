@@ -77,11 +77,8 @@ using the %{name} library.
 %setup -q
 
 %build
-%configure2_5x  --enable-shared=yes \ 
-		--enable-static=no \ 
-		--disable-inchi \ 
-		--enable-maintainer-mode \ 
-		--enable-doxygen
+%configure2_5x  --enable-shared=yes --enable-static=no --disable-inchi --enable-maintainer-mode --enable-doxygen
+
 %make
 
 %install
@@ -116,6 +113,7 @@ rm -rf %{buildroot}
 %files -n %{develname}
 %defattr(-, root, root)
 %{_includedir}/%name-2.0
+%{_includedir}/inchi
 %{_libdir}/pkgconfig/*.pc
 %{_libdir}/lib*.so
 %{_libdir}/lib*.la
