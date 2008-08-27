@@ -4,7 +4,7 @@
 
 Name: openbabel
 Version: 2.2.0
-Release: %mkrel 3
+Release: %mkrel 4
 Summary: Chemistry software file format converter
 License: GPLv2+
 Group: Sciences/Chemistry
@@ -14,6 +14,14 @@ Source: %{name}-%{version}.tar.gz
 BuildRequires: doxygen 
 BuildRequires: wxGTK-devel
 BuildRequires: libxml2-devel
+#BuildRequires: inchi-devel
+BuildRequires: libtool
+BuildRequires: libxml2-devel
+BuildRequires: perl(ExtUtils::MakeMaker)
+BuildRequires: python-devel
+BuildRequires: ruby-devel
+BuildRequires: swig
+
 Requires: %{libname} = %{version}
 
 %description
@@ -26,6 +34,7 @@ chemistry.
 Summary:        Shared libraries of %{name}
 Group:          System/Libraries
 Provides:	%{name} = %{version}-%{release}
+Conflicts:      %{develname} <  2.2.0-4
 
 %description	-n %{libname}
 Open Babel is a project designed to pick up where Babel left off, 
@@ -68,9 +77,11 @@ using the %{name} library.
 %setup -q
 
 %build
-%configure2_5x \
-	--enable-doxygen \
-	--enable-shared
+%configure2_5x  --enable-shared=yes \ 
+		--enable-static=no \ 
+		--disable-inchi \ 
+		--enable-maintainer-mode \ 
+		--enable-doxygen
 %make
 
 %install
@@ -94,6 +105,8 @@ rm -rf %{buildroot}
 %{_bindir}/*
 %{_mandir}/man?/*
 %{_datadir}/%{name}
+%{_libdir}/%{name}/%{version}/*.so
+%{_libdir}/%{name}/%{version}/*.la
 
 %files -n %{libname}
 %defattr(-, root, root)
@@ -102,16 +115,7 @@ rm -rf %{buildroot}
 
 %files -n %{develname}
 %defattr(-, root, root)
-%{_includedir}/*
+%{_includedir}/%name-2.0
 %{_libdir}/pkgconfig/*.pc
 %{_libdir}/lib*.so
 %{_libdir}/lib*.la
-%{_libdir}/%{name}/%{version}/*.so
-%{_libdir}/%{name}/%{version}/*.la
-
-#%files -n %{libname}%{major}-static-devel
-#%defattr(-, root, root)
-#%{_libdir}/lib*.a
-#%{_libdir}/%name
-
-
