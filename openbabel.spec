@@ -4,7 +4,7 @@
 
 Name: openbabel
 Version: 2.2.0
-Release: %mkrel 2
+Release: %mkrel 3
 Summary: Chemistry software file format converter
 License: GPLv2+
 Group: Sciences/Chemistry
@@ -13,6 +13,7 @@ URL: http://openbabel.sourceforge.net/
 Source: %{name}-%{version}.tar.gz
 BuildRequires: doxygen 
 BuildRequires: wxGTK-devel
+BuildRequires: libxml2-devel
 Requires: %{libname} = %{version}
 
 %description
