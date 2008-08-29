@@ -4,7 +4,7 @@
 
 Name: openbabel
 Version: 2.2.0
-Release: %mkrel 4
+Release: %mkrel 5
 Summary: Chemistry software file format converter
 License: GPLv2+
 Group: Sciences/Chemistry
@@ -14,7 +14,6 @@ Source: %{name}-%{version}.tar.gz
 BuildRequires: doxygen 
 BuildRequires: wxGTK-devel
 BuildRequires: libxml2-devel
-#BuildRequires: inchi-devel
 BuildRequires: libtool
 BuildRequires: libxml2-devel
 BuildRequires: perl(ExtUtils::MakeMaker)
@@ -49,6 +48,8 @@ Summary:        Development files of %{name}
 Group:          Development/C++
 Requires:	%{libname} = %{version}
 Provides:       %{name}-devel = %{version}-%{release}
+Obsoletes: %mklibname %{name} 2 -d 
+Obsoletes: %mklibname %{name} 3 -d 
 
 %description	-n %{develname}
 Open Babel is a project designed to pick up where Babel left off, 
