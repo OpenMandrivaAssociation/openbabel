@@ -3,8 +3,8 @@
 %define develname %mklibname %{name} -d
 
 Name: openbabel
-Version: 2.2.0
-Release: %mkrel 5
+Version: 2.2.1
+Release: %mkrel 1
 Summary: Chemistry software file format converter
 License: GPLv2+
 Group: Sciences/Chemistry
@@ -13,7 +13,6 @@ URL: http://openbabel.sourceforge.net/
 Source: %{name}-%{version}.tar.gz
 BuildRequires: doxygen 
 BuildRequires: wxGTK-devel
-BuildRequires: libxml2-devel
 BuildRequires: libtool
 BuildRequires: libxml2-devel
 BuildRequires: perl(ExtUtils::MakeMaker)
@@ -108,8 +107,7 @@ rm -rf %{buildroot}
 
 %files -n %{libname}
 %defattr(-, root, root)
-%{_libdir}/lib*.so.%{major}
-%{_libdir}/lib*.so.%{major}.*
+%{_libdir}/lib*.so.%{major}*
 
 %files -n %{develname}
 %defattr(-, root, root)
