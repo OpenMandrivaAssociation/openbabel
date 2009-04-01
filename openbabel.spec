@@ -4,7 +4,7 @@
 
 Name: openbabel
 Version: 2.2.1
-Release: %mkrel 1
+Release: %mkrel 2
 Summary: Chemistry software file format converter
 License: GPLv2+
 Group: Sciences/Chemistry
@@ -60,18 +60,18 @@ This package includes the header files and other development
 related files necessary for developing or compiling programs
 using the %{name} library.
 
-#%package	-n %{libname}%{major}-static-devel
-#Summary:        Static library of %{name}
-#Group:          System/Libraries
-#Requires:	%{libname}%{major}-devel = %{version}
+%package	-n %{libname}%{major}-static-devel
+Summary:        Static library of %{name}
+Group:          System/Libraries
+Requires:	%{libname}%{major}-devel = %{version}
 
-#%description	-n %{libname}%{major}-static-devel
-#Open Babel is a project designed to pick up where Babel left off, 
-#as a cross-platform program and library designed to interconvert 
-#between many file formats used in molecular modeling and computational
-#chemistry.
+%description	-n %{libname}%{major}-static-devel
+Open Babel is a project designed to pick up where Babel left off, 
+as a cross-platform program and library designed to interconvert 
+between many file formats used in molecular modeling and computational
+chemistry.
 
-#This package contains static library of %{name}.
+This package contains static library of %{name}.
 
 %prep
 %setup -q
@@ -103,7 +103,7 @@ rm -rf %{buildroot}
 %{_mandir}/man?/*
 %{_datadir}/%{name}
 %{_libdir}/%{name}/%{version}/*.so
-%{_libdir}/%{name}/%{version}/*.la
+#%{_libdir}/%{name}/%{version}/*.la
 
 %files -n %{libname}
 %defattr(-, root, root)
@@ -112,7 +112,11 @@ rm -rf %{buildroot}
 %files -n %{develname}
 %defattr(-, root, root)
 %{_includedir}/%name-2.0
-%{_includedir}/inchi
 %{_libdir}/pkgconfig/*.pc
 %{_libdir}/lib*.so
+#%{_libdir}/lib*.la
+
+%files -n %{libname}%{major}-static-devel
 %{_libdir}/lib*.la
+%{_libdir}/%{name}/%{version}/*.la
+
