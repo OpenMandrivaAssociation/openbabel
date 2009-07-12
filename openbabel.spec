@@ -3,8 +3,8 @@
 %define develname %mklibname %{name} -d
 
 Name: openbabel
-Version: 2.2.1
-Release: %mkrel 2
+Version: 2.2.2
+Release: %mkrel 1
 Summary: Chemistry software file format converter
 License: GPLv2+
 Group: Sciences/Chemistry
@@ -112,7 +112,6 @@ rm -rf %{buildroot}
 %files -n %{develname}
 %defattr(-, root, root)
 %{_includedir}/%name-2.0
-%{_includedir}/inchi/inchi_api.h
 %{_libdir}/pkgconfig/*.pc
 %{_libdir}/lib*.so
 #%{_libdir}/lib*.la
