@@ -1,6 +1,7 @@
 %define major 3
 %define libname %mklibname %{name} %{major}
 %define develname %mklibname %{name} -d
+%define staticname %mklibname %{name} -d -s
 
 Name: openbabel
 Version: 2.2.3
@@ -46,7 +47,6 @@ This package contains shared libraries of %{name}.
 Summary:        Development files of %{name}
 Group:          Development/C++
 Requires:	%{libname} = %{version}
-Provides:       %{name}-devel = %{version}-%{release}
 Obsoletes: %mklibname %{name} 2 -d 
 Obsoletes: %mklibname %{name} 3 -d 
 
@@ -60,12 +60,13 @@ This package includes the header files and other development
 related files necessary for developing or compiling programs
 using the %{name} library.
 
-%package	-n %{libname}%{major}-static-devel
+%package	-n %{staticname}
 Summary:        Static library of %{name}
 Group:          System/Libraries
-Requires:	%{libname}%{major}-devel = %{version}
+Requires:	%{develname} = %{version}
+Obsoletes:	%{_lib}%{name}33-static-devel
 
-%description	-n %{libname}%{major}-static-devel
+%description	-n %{staticname}
 Open Babel is a project designed to pick up where Babel left off, 
 as a cross-platform program and library designed to interconvert 
 between many file formats used in molecular modeling and computational
@@ -77,7 +78,7 @@ This package contains static library of %{name}.
 %setup -q
 
 %build
-%configure2_5x  --enable-shared=yes --enable-static=no --disable-inchi --enable-maintainer-mode --enable-doxygen
+%configure2_5x  --enable-shared=yes --enable-static=no --disable-inchi --enable-maintainer-mode
 
 %make
 
@@ -114,9 +115,10 @@ rm -rf %{buildroot}
 %{_includedir}/%name-2.0
 %{_libdir}/pkgconfig/*.pc
 %{_libdir}/lib*.so
+%{_includedir}/inchi102/inchi_api.h
 #%{_libdir}/lib*.la
 
-%files -n %{libname}%{major}-static-devel
+%files -n %{staticname}
 %{_libdir}/lib*.la
 %{_libdir}/%{name}/%{version}/*.la
 
