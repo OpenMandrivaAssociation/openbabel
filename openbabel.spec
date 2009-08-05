@@ -5,7 +5,7 @@
 
 Name: openbabel
 Version: 2.2.3
-Release: %mkrel 1
+Release: %mkrel 2
 Summary: Chemistry software file format converter
 License: GPLv2+
 Group: Sciences/Chemistry
@@ -47,6 +47,7 @@ This package contains shared libraries of %{name}.
 Summary:        Development files of %{name}
 Group:          Development/C++
 Requires:	%{libname} = %{version}
+Provides:	%{name}-devel = %{version}-%{release}
 Obsoletes: %mklibname %{name} 2 -d 
 Obsoletes: %mklibname %{name} 3 -d 
 
@@ -64,6 +65,7 @@ using the %{name} library.
 Summary:        Static library of %{name}
 Group:          System/Libraries
 Requires:	%{develname} = %{version}
+Provides:	%{name}-static-devel = %{version}-%{release}
 Obsoletes:	%{_lib}%{name}33-static-devel
 
 %description	-n %{staticname}
