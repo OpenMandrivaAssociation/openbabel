@@ -5,7 +5,7 @@
 
 Name: openbabel
 Version: 2.2.3
-Release: %mkrel 4
+Release: %mkrel 5
 Summary: Chemistry software file format converter
 License: GPLv2+
 Group: Sciences/Chemistry
@@ -32,7 +32,6 @@ chemistry.
 %package	-n %{libname}
 Summary:        Shared libraries of %{name}
 Group:          System/Libraries
-Provides:	%{name} = %{version}-%{release}
 Conflicts:      %{develname} <  2.2.0-4
 
 %description	-n %{libname}
