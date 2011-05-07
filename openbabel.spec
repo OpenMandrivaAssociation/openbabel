@@ -172,4 +172,4 @@ rm -rf %{buildroot}
 
 %files -n ruby-%{name}
 %defattr(-, root, root, -)
-%{ruby_sitearch}/openbabel.so
+%{ruby_sitearchdir}/openbabel.so
