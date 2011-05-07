@@ -122,6 +122,7 @@ Ruby wrapper for the Open Babel library.
 
 %install
 rm -rf %{buildroot}
+export DESTDIR=%{buildroot}
 %makeinstall_std -C build
 
 %if %mdkversion < 200900
