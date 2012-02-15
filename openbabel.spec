@@ -11,7 +11,7 @@ Summary:	Chemistry software file format converter
 License:	GPLv2+
 Group:		Sciences/Chemistry
 URL:		http://openbabel.org
-Source0:	http://downloads.sourceforge.net/%name/%{name}-%{version}.tar.gz
+Source0:	http://downloads.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
 Patch1:		openbabel-2.3.1-rpm.patch
 Patch4:		openbabel-2.3.0-plugindir.patch
 Patch5:		openbabel-2.3.1-python-library_dirs-lame-workaround.patch
