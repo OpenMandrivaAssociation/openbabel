@@ -6,7 +6,7 @@
 
 Name: openbabel
 Version: 2.3.0
-Release: %mkrel 2
+Release:	3
 Summary: Chemistry software file format converter
 License: GPLv2+
 Group: Sciences/Chemistry
