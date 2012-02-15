@@ -5,18 +5,16 @@
 %define staticname %mklibname %{name} -d -s
 
 Name: openbabel
-Version: 2.3.0
-Release:	3
+Version: 2.3.1
+Release:	1
 Summary: Chemistry software file format converter
 License: GPLv2+
 Group: Sciences/Chemistry
 BuildRoot: %{_tmppath}/%{name}-%{version}-buildroot
 URL: http://openbabel.org
-Source: http://downloads.sourceforge.net/%name/%{name}-%{version}.tar.gz
-Patch1: openbabel-rpm.patch
-Patch3: openbabel-inchi.patch
+Source0: http://downloads.sourceforge.net/%name/%{name}-%{version}.tar.gz
+Patch1: openbabel-2.3.1-rpm.patch
 Patch4: openbabel-2.3.0-plugindir.patch
-Patch5: openbabel-2.3.0-obenergy-fflist.patch
 BuildRequires: doxygen 
 BuildRequires: wxgtku2.8-devel
 BuildRequires: libtool
@@ -107,9 +105,7 @@ Ruby wrapper for the Open Babel library.
 %prep
 %setup -q
 %patch1 -p1 -b .r
-%patch3 -p1 -b .inchi
 %patch4 -p1 -b .plugindir
-%patch5 -p1 -b .obenergy-fflist
 
 %build
 %cmake \
