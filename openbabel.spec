@@ -156,7 +156,8 @@ rm -rf %{buildroot}
 %files -n %{develname}
 %defattr(-, root, root)
 %{_includedir}/*
-%{_libdir}/%{name}/*.cmake
+%dir %{_libdir}/cmake/openbabel2
+%{_libdir}/cmake/openbabel2/*.cmake
 %{_libdir}/pkgconfig/*.pc
 %{_libdir}/lib*.so
 
