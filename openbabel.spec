@@ -15,6 +15,7 @@ URL: http://openbabel.org
 Source0: http://downloads.sourceforge.net/%name/%{name}-%{version}.tar.gz
 Patch1: openbabel-2.3.1-rpm.patch
 Patch4: openbabel-2.3.0-plugindir.patch
+Patch5:	openbabel-2.3.1-python-library_dirs-lame-workaround.patch
 BuildRequires: doxygen 
 BuildRequires: wxgtku2.8-devel
 BuildRequires: libtool
@@ -106,6 +107,7 @@ Ruby wrapper for the Open Babel library.
 %setup -q
 %patch1 -p1 -b .r
 %patch4 -p1 -b .plugindir
+%patch5 -p1 -b .py_libdirs~
 
 %build
 %cmake \
