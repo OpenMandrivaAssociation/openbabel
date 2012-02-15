@@ -26,7 +26,6 @@ BuildRequires:	python-devel
 BuildRequires:	ruby-devel
 BuildRequires:	swig
 BuildRequires:	cmake
-Requires:	%{libname} = %{version}
 
 %description
 Open Babel is a project designed to pick up where Babel left off, 
