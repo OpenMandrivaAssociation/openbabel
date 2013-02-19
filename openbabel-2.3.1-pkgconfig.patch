@@ -1,0 +1,10 @@
+--- openbabel-2.0.pc.cmake.orig	2013-02-19 15:22:00.703340769 +0000
++++ openbabel-2.0.pc.cmake	2013-02-19 15:22:07.746341054 +0000
+@@ -1,6 +1,6 @@
+ prefix=@CMAKE_INSTALL_PREFIX@
+ exec_prefix=${prefix}
+-libdir=${exec_prefix}/@LIB_INSTALL_DIR@
++libdir=@LIB_INSTALL_DIR@
+ includedir=${prefix}/include
+ pkgincludedir=${includedir}/openbabel-2.0
+ 

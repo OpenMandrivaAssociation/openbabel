@@ -6,7 +6,7 @@
 
 Name:		openbabel
 Version:	2.3.1
-Release:	1
+Release:	2
 Summary:	Chemistry software file format converter
 License:	GPLv2+
 Group:		Sciences/Chemistry
@@ -17,6 +17,7 @@ Patch2:		openbabel-2.3.1-gcc47-darwin.patch
 Patch3:		openbabel-2.3.1-noswig-rubymethod.patch
 Patch4:		openbabel-2.3.0-plugindir.patch
 Patch5:		openbabel-2.3.1-python-library_dirs-lame-workaround.patch
+Patch6:		openbabel-2.3.1-pkgconfig.patch
 BuildRequires:	doxygen
 BuildRequires:	wxgtku2.8-devel
 BuildRequires:	libtool
@@ -108,6 +109,7 @@ Ruby wrapper for the Open Babel library.
 %patch3 -p1 -b .ruby~
 %patch4 -p1 -b .plugindir
 %patch5 -p1 -b .py_libdirs~
+%patch6 -p0 -b .pkgconfig
 
 %build
 %cmake \
