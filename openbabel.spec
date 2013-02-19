@@ -1,16 +1,15 @@
-%define major 4
-%define libname %mklibname %{name} %{major}
+%define major	4
+%define libname	%mklibname %{name} %{major}
 %define inchilib %mklibname inchi 0
-%define develname %mklibname %{name} -d
-%define staticname %mklibname %{name} -d -s
+%define devname	%mklibname %{name} -d
 
+Summary:	Chemistry software file format converter
 Name:		openbabel
 Version:	2.3.1
 Release:	2
-Summary:	Chemistry software file format converter
 License:	GPLv2+
 Group:		Sciences/Chemistry
-URL:		http://openbabel.org
+Url:		http://openbabel.org
 Source0:	http://downloads.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
 Patch1:		openbabel-2.3.1-rpm.patch
 Patch2:		openbabel-2.3.1-gcc47-darwin.patch
@@ -18,17 +17,18 @@ Patch3:		openbabel-2.3.1-noswig-rubymethod.patch
 Patch4:		openbabel-2.3.0-plugindir.patch
 Patch5:		openbabel-2.3.1-python-library_dirs-lame-workaround.patch
 Patch6:		openbabel-2.3.1-pkgconfig.patch
-BuildRequires:	doxygen
-BuildRequires:	wxgtku2.8-devel
-BuildRequires:	libtool
-BuildRequires:	pkgconfig(libxml-2.0)
-BuildRequires:	eigen2
-BuildRequires:	perl(ExtUtils::MakeMaker)
-BuildRequires:	perl-devel
-BuildRequires:	python-devel
-BuildRequires:	ruby-devel
-BuildRequires:	swig
+
 BuildRequires:	cmake
+BuildRequires:	doxygen
+BuildRequires:	eigen2
+BuildRequires:	swig
+BuildRequires:	libtool
+BuildRequires:	perl-devel
+BuildRequires:	ruby-devel
+BuildRequires:	wxgtku2.8-devel
+BuildRequires:	perl(ExtUtils::MakeMaker)
+BuildRequires:	pkgconfig(libxml-2.0)
+BuildRequires:	pkgconfig(python)
 
 %description
 Open Babel is a project designed to pick up where Babel left off, 
@@ -62,7 +62,7 @@ progress are available from the project web site.
 
 This package contains shared libraries of inchi.
 
-%package -n	%{develname}
+%package -n	%{devname}
 Summary:	Development files of %{name}
 Group:		Development/C++
 Requires:	%{libname} = %{version}
@@ -70,7 +70,7 @@ Requires:	%{inchilib} = %{version}
 Provides:	%{name}-devel = %{version}-%{release}
 Obsoletes:	%{staticname} < 2.3.0
 
-%description	-n %{develname}
+%description	-n %{devname}
 Open Babel is a project designed to pick up where Babel left off, 
 as a cross-platform program and library designed to interconvert 
 between many file formats used in molecular modeling and computational
@@ -137,10 +137,9 @@ Ruby wrapper for the Open Babel library.
 %{_libdir}/lib%{name}.so.%{major}*
 
 %files -n %{inchilib}
-%{_libdir}/libinchi.so.0.*
-%{_libdir}/libinchi.so.0
+%{_libdir}/libinchi.so.0*
 
-%files -n %{develname}
+%files -n %{devname}
 %{_includedir}/*
 %dir %{_libdir}/cmake/openbabel2
 %{_libdir}/cmake/openbabel2/*.cmake
