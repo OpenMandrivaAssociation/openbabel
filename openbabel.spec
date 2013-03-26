@@ -2,11 +2,12 @@
 %define libname	%mklibname %{name} %{major}
 %define inchilib %mklibname inchi 0
 %define devname	%mklibname %{name} -d
+%define staticname %mklibname %{name} -d -s
 
 Summary:	Chemistry software file format converter
 Name:		openbabel
 Version:	2.3.1
-Release:	2
+Release:	3
 License:	GPLv2+
 Group:		Sciences/Chemistry
 Url:		http://openbabel.org
