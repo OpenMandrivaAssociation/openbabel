@@ -6,8 +6,8 @@
 
 Summary:	Chemistry software file format converter
 Name:		openbabel
-Version:	2.3.1
-Release:	9
+Version:	2.3.2
+Release:	1
 License:	GPLv2+
 Group:		Sciences/Chemistry
 Url:		http://openbabel.org
@@ -19,10 +19,11 @@ Patch4:		openbabel-2.3.0-plugindir.patch
 Patch5:		openbabel-2.3.1-python-library_dirs-lame-workaround.patch
 Patch6:		openbabel-2.3.1-pkgconfig.patch
 Patch7:		openbabel-2.3.1-ruby-path.patch
+Patch8:		openbabel-2.3.2-cmake.patch
 
 BuildRequires:	cmake
 BuildRequires:	doxygen
-BuildRequires:	eigen2
+BuildRequires:	eigen3
 BuildRequires:	swig
 BuildRequires:	libtool
 BuildRequires:	perl-devel
@@ -114,6 +115,7 @@ Ruby wrapper for the Open Babel library.
 %patch5 -p1 -b .py_libdirs~
 %patch6 -p0 -b .pkgconfig
 %patch7 -p1 -b .ruby
+%patch8 -p1 -b .cmake
 
 %build
 %cmake \
@@ -125,7 +127,18 @@ Ruby wrapper for the Open Babel library.
 %make
 
 %install
-%makeinstall_std -C build
+
+mkdir -p %{buildroot}%ruby_sitearchdir
+
+%makeinstall_std -C build 
+
+# Put Python bindings in the right place.
+# See http://sourceforge.net/p/openbabel/bugs/837/
+mkdir -p %{buildroot}%{python2_sitearch}
+mv  %{buildroot}%{_libdir}/_openbabel.so \
+    %{buildroot}%{_libdir}/openbabel.py* \
+    %{buildroot}%{_libdir}/pybel.py* \
+    %{buildroot}%{python2_sitearch}
 
 %files
 %doc AUTHORS COPYING ChangeLog README THANKS
@@ -154,7 +167,7 @@ Ruby wrapper for the Open Babel library.
 %{perl_vendorarch}/*
 
 %files -n python-%{name}
-%{python_sitearch}/*
+%{python2_sitearch}/*
 
 %files -n ruby-%{name}
 %{ruby_sitearchdir}/openbabel.so
