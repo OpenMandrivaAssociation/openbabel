@@ -18,6 +18,7 @@ Patch3:		openbabel-2.3.1-noswig-rubymethod.patch
 Patch4:		openbabel-2.3.0-plugindir.patch
 Patch5:		openbabel-2.3.1-python-library_dirs-lame-workaround.patch
 Patch6:		openbabel-2.3.1-pkgconfig.patch
+Patch7:		openbabel-2.3.1-ruby-path.patch
 
 BuildRequires:	cmake
 BuildRequires:	doxygen
@@ -111,6 +112,7 @@ Ruby wrapper for the Open Babel library.
 %patch4 -p1 -b .plugindir
 %patch5 -p1 -b .py_libdirs~
 %patch6 -p0 -b .pkgconfig
+%patch7 -p1 -b .ruby
 
 %build
 %cmake \
