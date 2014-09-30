@@ -27,6 +27,7 @@ BuildRequires:	swig
 BuildRequires:	libtool
 BuildRequires:	perl-devel
 BuildRequires:	ruby-devel
+BuildRequires:	rubygems
 BuildRequires:	wxgtku2.8-devel
 BuildRequires:	perl(ExtUtils::MakeMaker)
 BuildRequires:	pkgconfig(libxml-2.0)
