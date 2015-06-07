@@ -118,6 +118,8 @@ Ruby wrapper for the Open Babel library.
 %patch8 -p1 -b .cmake
 
 %build
+%global optflags %optflags -std=gnu++98
+
 %cmake \
  -DBUILD_GUI:BOOL=ON \
  -DPYTHON_BINDINGS:BOOL=ON \
