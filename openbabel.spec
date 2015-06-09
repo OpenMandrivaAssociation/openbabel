@@ -117,6 +117,9 @@ Ruby wrapper for the Open Babel library.
 %patch7 -p1 -b .ruby
 %patch8 -p1 -b .cmake
 
+# remove hardcoded g++
+sed -i 's!g++!%{__cxx}!g' scripts/perl/Makefile.PL
+
 %build
 %global CXXFLAGS %CXXFLAGS -std=c++98
 %cmake \
@@ -125,6 +128,7 @@ Ruby wrapper for the Open Babel library.
  -DPERL_BINDINGS:BOOL=ON \
  -DRUBY_BINDINGS:BOOL=ON \
  -DOPENBABEL_USE_SYSTEM_INCHI=OFF
+
 %make
 
 %install
