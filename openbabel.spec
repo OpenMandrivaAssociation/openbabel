@@ -1,3 +1,5 @@
+# disable ruby
+%bcond_with ruby
 %define major	4
 %define libname	%mklibname %{name} %{major}
 %define inchilib %mklibname inchi 0
@@ -27,8 +29,10 @@ BuildRequires:	eigen3
 BuildRequires:	swig
 BuildRequires:	libtool
 BuildRequires:	perl-devel
+%if %{with ruby}
 BuildRequires:	ruby-devel
 BuildRequires:	rubygems
+%endif
 BuildRequires:	wxgtku2.8-devel
 BuildRequires:	perl(ExtUtils::MakeMaker)
 BuildRequires:	pkgconfig(libxml-2.0)
@@ -98,6 +102,7 @@ Summary: Python wrapper for the Open Babel library
 %description -n	python-%{name}
 Python wrapper for the Open Babel library.
 
+%if %{with ruby}
 %package -n	ruby-%{name}
 Summary:	Ruby wrapper for the Open Babel library
 Group:		Development/Ruby
@@ -105,6 +110,7 @@ Requires:	%{name} = %{version}-%{release}
 
 %description -n	ruby-%{name}
 Ruby wrapper for the Open Babel library.
+%endif
 
 %prep
 %setup -q
@@ -133,7 +139,9 @@ sed -i 's!g++!%{__cxx}!g' scripts/perl/Makefile.PL
 
 %install
 
+%if %{with ruby}
 mkdir -p %{buildroot}%ruby_sitearchdir
+%endif
 
 %makeinstall_std -C build 
 
@@ -174,5 +182,7 @@ mv  %{buildroot}%{_libdir}/_openbabel.so \
 %files -n python-%{name}
 %{python2_sitearch}/*
 
+%if %{with ruby}
 %files -n ruby-%{name}
 %{ruby_sitearchdir}/openbabel.so
+%endif
