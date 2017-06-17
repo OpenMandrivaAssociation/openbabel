@@ -1,4 +1,2 @@
-removed_sources:
-  openbabel-2.3.1.tar.gz: b2dd1638eaf7e6d350110b1561aeb23b03552846
 sources:
-  openbabel-2.3.2.tar.gz: b8831a308617d1c78a790479523e43524f07d50d
+  openbabel-2-4-1.tar.gz: 1e3e221987389166555cf9c7676d106dc824af70

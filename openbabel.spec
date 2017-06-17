@@ -1,6 +1,7 @@
-# disable ruby
+%bcond_with perl
+%bcond_with python
 %bcond_with ruby
-%define major	4
+%define major	5
 %define libname	%mklibname %{name} %{major}
 %define inchilib %mklibname inchi 0
 %define devname	%mklibname %{name} -d
@@ -8,17 +9,17 @@
 
 Summary:	Chemistry software file format converter
 Name:		openbabel
-Version:	2.3.2
-Release:	5
+Version:	2.4.1
+Release:	1
 License:	GPLv2+
 Group:		Sciences/Chemistry
 Url:		http://openbabel.org
-Source0:	http://downloads.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
-Patch1:		openbabel-2.3.1-rpm.patch
-Patch2:		openbabel-2.3.1-gcc47-darwin.patch
-Patch3:		openbabel-2.3.1-noswig-rubymethod.patch
-Patch4:		openbabel-2.3.0-plugindir.patch
-Patch5:		openbabel-2.3.1-python-library_dirs-lame-workaround.patch
+Source0:	https://github.com/openbabel/openbabel/archive/openbabel-%(echo %{version} |sed -e 's,\.,-,g').tar.gz
+#Patch1:		openbabel-2.3.1-rpm.patch
+#atch2:		openbabel-2.3.1-gcc47-darwin.patch
+#Patch3:		openbabel-2.3.1-noswig-rubymethod.patch
+#Patch4:		openbabel-2.3.0-plugindir.patch
+#Patch5:		openbabel-2.3.1-python-library_dirs-lame-workaround.patch
 Patch6:		openbabel-2.3.1-pkgconfig.patch
 Patch7:		openbabel-2.3.1-ruby-path.patch
 Patch8:		openbabel-2.3.2-cmake.patch
@@ -88,19 +89,23 @@ This package includes the header files and other development
 related files necessary for developing or compiling programs
 using the %{name} library.
 
+%if %{with perl}
 %package -n	perl-%{name}
 Group:		Development/Perl
 Summary:	Perl wrapper for the Open Babel library
 
 %description -n	perl-%{name}
 Perl wrapper for the Open Babel library.
+%endif
 
+%if %{with python}
 %package -n	python-%{name}
 Group: Development/Python
 Summary: Python wrapper for the Open Babel library
 
 %description -n	python-%{name}
 Python wrapper for the Open Babel library.
+%endif
 
 %if %{with ruby}
 %package -n	ruby-%{name}
@@ -113,15 +118,15 @@ Ruby wrapper for the Open Babel library.
 %endif
 
 %prep
-%setup -q
-%patch1 -p1 -b .r
-%patch2 -p1 -b .gcc4.7~
-%patch3 -p1 -b .ruby~
-%patch4 -p1 -b .plugindir
-%patch5 -p1 -b .py_libdirs~
+%setup -qn %{name}-%{name}-%(echo %{version}|sed -e 's,\.,-,g')
+#patch1 -p1 -b .r
+#patch2 -p1 -b .gcc4.7~
+#patch3 -p1 -b .ruby~
+#patch4 -p1 -b .plugindir
+#patch5 -p1 -b .py_libdirs~
 %patch6 -p0 -b .pkgconfig
-%patch7 -p1 -b .ruby
-%patch8 -p1 -b .cmake
+#patch7 -p1 -b .ruby
+#patch8 -p1 -b .cmake
 
 # remove hardcoded g++
 sed -i 's!g++!%{__cxx}!g' scripts/perl/Makefile.PL
@@ -145,6 +150,7 @@ mkdir -p %{buildroot}%ruby_sitearchdir
 
 %makeinstall_std -C build 
 
+%if 0
 # Put Python bindings in the right place.
 # See http://sourceforge.net/p/openbabel/bugs/837/
 mkdir -p %{buildroot}%{python2_sitearch}
@@ -152,9 +158,10 @@ mv  %{buildroot}%{_libdir}/_openbabel.so \
     %{buildroot}%{_libdir}/openbabel.py* \
     %{buildroot}%{_libdir}/pybel.py* \
     %{buildroot}%{python2_sitearch}
+%endif
 
 %files
-%doc AUTHORS COPYING ChangeLog README THANKS
+%doc AUTHORS COPYING THANKS
 %doc doc/*.html doc/diox* doc/README*
 %{_bindir}/*
 %{_mandir}/man?/*
@@ -176,11 +183,15 @@ mv  %{buildroot}%{_libdir}/_openbabel.so \
 %{_libdir}/pkgconfig/*.pc
 %{_libdir}/lib*.so
 
+%if %{with perl}
 %files -n perl-%{name}
 %{perl_vendorarch}/*
+%endif
 
+%if %{with python}
 %files -n python-%{name}
 %{python2_sitearch}/*
+%endif
 
 %if %{with ruby}
 %files -n ruby-%{name}
