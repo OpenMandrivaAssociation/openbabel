@@ -10,16 +10,16 @@
 Summary:	Chemistry software file format converter
 Name:		openbabel
 Version:	2.4.1
-Release:	1
+Release:	2
 License:	GPLv2+
 Group:		Sciences/Chemistry
 Url:		http://openbabel.org
 Source0:	https://github.com/openbabel/openbabel/archive/openbabel-%(echo %{version} |sed -e 's,\.,-,g').tar.gz
-#Patch1:		openbabel-2.3.1-rpm.patch
+#Patch1:	openbabel-2.3.1-rpm.patch
 #atch2:		openbabel-2.3.1-gcc47-darwin.patch
-#Patch3:		openbabel-2.3.1-noswig-rubymethod.patch
-#Patch4:		openbabel-2.3.0-plugindir.patch
-#Patch5:		openbabel-2.3.1-python-library_dirs-lame-workaround.patch
+#Patch3:	openbabel-2.3.1-noswig-rubymethod.patch
+#Patch4:	openbabel-2.3.0-plugindir.patch
+#Patch5:	openbabel-2.3.1-python-library_dirs-lame-workaround.patch
 Patch6:		openbabel-2.3.1-pkgconfig.patch
 Patch7:		openbabel-2.3.1-ruby-path.patch
 Patch8:		openbabel-2.3.2-cmake.patch
