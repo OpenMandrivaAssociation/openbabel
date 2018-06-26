@@ -1,6 +1,7 @@
 %bcond_with perl
 %bcond_with python
 %bcond_with ruby
+%bcond_without wx
 %define major	5
 %define libname	%mklibname %{name} %{major}
 %define inchilib %mklibname inchi 0
@@ -34,7 +35,9 @@ BuildRequires:	perl-devel
 BuildRequires:	ruby-devel
 BuildRequires:	rubygems
 %endif
-BuildRequires:	wxgtku2.8-devel
+%if %{with wx}
+BuildRequires:	wxgtku3.0-devel
+%endif
 BuildRequires:	perl(ExtUtils::MakeMaker)
 BuildRequires:	pkgconfig(libxml-2.0)
 BuildRequires:	pkgconfig(python)
