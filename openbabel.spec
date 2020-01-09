@@ -185,7 +185,7 @@ popd
 mkdir -p %{buildroot}%ruby_sitearchdir
 %endif
 
-%makeinstall_std -C build 
+%make_install -C build 
 
 %if 0
 # Put Python bindings in the right place.
