@@ -1,0 +1,21 @@
+diff -up openbabel-openbabel-2-4-1/test/CMakeLists.txt.s390x openbabel-openbabel-2-4-1/test/CMakeLists.txt
+--- openbabel-openbabel-2-4-1/test/CMakeLists.txt.s390x	2016-10-10 17:56:17.000000000 +0200
++++ openbabel-openbabel-2-4-1/test/CMakeLists.txt	2019-01-27 19:32:21.568052461 +0100
+@@ -62,7 +62,7 @@ set(origtests
+     )
+ set (atom_parts 1 2 3 4)
+ set (ffmmff94_parts 1 2)
+-set (math_parts 1 2 3 4)
++set (math_parts 1 2 3)
+ 
+ if(BUILD_SHARED)
+   if(LIBXML2_FOUND)
+@@ -238,7 +238,7 @@ endif(NOT MINGW AND NOT CYGWIN)
+ if (PYTHON_BINDINGS)
+   include(UsePythonTest)
+   set(pybindtests
+-      bindings _pybel example)
++      bindings example)
+   foreach(pybindtest ${pybindtests})
+     SET_SOURCE_FILES_PROPERTIES(test${pybindtest}.py PROPERTIES
+         PYTHONPATH "${CMAKE_SOURCE_DIR}/scripts/python:${CMAKE_BINARY_DIR}/lib${LIB_SUFFIX}"

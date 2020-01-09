@@ -1,0 +1,15 @@
+diff -up openbabel-openbabel-2-4-1/scripts/CMakeLists.txt.py3 openbabel-openbabel-2-4-1/scripts/CMakeLists.txt
+--- openbabel-openbabel-2-4-1/scripts/CMakeLists.txt.py3	2019-03-04 11:12:54.369464503 +0100
++++ openbabel-openbabel-2-4-1/scripts/CMakeLists.txt	2019-03-04 11:59:39.323264995 +0100
+@@ -84,7 +84,10 @@ if (DO_PYTHON_BINDINGS)
+               COMMAND ${CMAKE_COMMAND} -E echo "  try:" >> ob.py
+               COMMAND ${CMAKE_COMMAND} -E echo "    import dl" >> ob.py
+               COMMAND ${CMAKE_COMMAND} -E echo "  except ImportError:" >> ob.py
+-              COMMAND ${CMAKE_COMMAND} -E echo "    import DLFCN as dl" >> ob.py
++              COMMAND ${CMAKE_COMMAND} -E echo "    try:" >> ob.py
++              COMMAND ${CMAKE_COMMAND} -E echo "      import DLFCN as dl" >> ob.py
++              COMMAND ${CMAKE_COMMAND} -E echo "    except ImportError:" >> ob.py
++              COMMAND ${CMAKE_COMMAND} -E echo "      import ctypes as dl" >> ob.py
+               COMMAND ${CMAKE_COMMAND} -E echo "  sys.setdlopenflags(sys.getdlopenflags() | dl.RTLD_GLOBAL)" >> ob.py
+               COMMAND cat ${openbabel_SOURCE_DIR}/scripts/python/openbabel.py >> ob.py
+               COMMAND ${CMAKE_COMMAND} -E copy ob.py ${openbabel_SOURCE_DIR}/scripts/python/openbabel.py

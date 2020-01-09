@@ -1,0 +1,33 @@
+diff -up openbabel-3a63a9849f8d9719c5989c43875d51be50c53019/src/formats/pngformat.cpp.nc openbabel-3a63a9849f8d9719c5989c43875d51be50c53019/src/formats/pngformat.cpp
+--- openbabel-3a63a9849f8d9719c5989c43875d51be50c53019/src/formats/pngformat.cpp.nc	2016-02-16 23:47:25.000000000 +0100
++++ openbabel-3a63a9849f8d9719c5989c43875d51be50c53019/src/formats/pngformat.cpp	2016-02-18 19:01:40.509752461 +0100
+@@ -218,7 +218,7 @@ bool PNGFormat::ReadMolecule(OBBase* pOb
+     _count=0;
+     _hasInputPngFile=true;
+   }
+-  const char pngheader[] = {-119,80,78,71,13,10,26,10,0};
++  const signed char pngheader[] = {-119,80,78,71,13,10,26,10,0};
+   char readbytes[9];
+   ifs.read(readbytes, 8);
+ 
+diff -up openbabel-3a63a9849f8d9719c5989c43875d51be50c53019/src/formats/yasaraformat.cpp.nc openbabel-3a63a9849f8d9719c5989c43875d51be50c53019/src/formats/yasaraformat.cpp
+--- openbabel-3a63a9849f8d9719c5989c43875d51be50c53019/src/formats/yasaraformat.cpp.nc	2016-02-16 23:47:25.000000000 +0100
++++ openbabel-3a63a9849f8d9719c5989c43875d51be50c53019/src/formats/yasaraformat.cpp	2016-02-18 23:22:23.786793588 +0100
+@@ -472,7 +472,7 @@ bool YOBFormat::WriteMolecule(OBBase* pO
+ 
+   //  bool hetatom;
+   char buffer[32],/*resname[4],*/atomname[5];
+-  char double1[8]={0,0,0,0,0,0,-16,0x3f};
++  const signed char double1[8]={0,0,0,0,0,0,-16,0x3f};
+   //   char *str;
+   int i,j,/*m,q,*/pos;
+   int /*resno,chainNum,link,linktype,*/atoms,element,links/*,chain*/;
+@@ -500,7 +500,7 @@ bool YOBFormat::WriteMolecule(OBBase* pO
+   mem_set(buffer,0,8);
+   for (i=0;i<4;i++)
+   { for (j=0;j<4;j++)
+-    { if (i==j) ofs.write(double1,8);
++    { if (i==j) ofs.write(reinterpret_cast<const char*>(double1),8);
+       else ofs.write(buffer,8); } }
+   storeint32le(buffer,MOB_INFOEND);
+   storeint32le(&buffer[4],MOB_INFOENDSIZE);
