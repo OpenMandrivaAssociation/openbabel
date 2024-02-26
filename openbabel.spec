@@ -2,7 +2,7 @@
 %bcond_with python
 %bcond_with ruby
 %bcond_without wx
-%define major	5
+%define major	7
 %define libname	%mklibname %{name} %{major}
 %define inchilib %mklibname inchi 0
 %define devname	%mklibname %{name} -d
@@ -10,8 +10,8 @@
 
 Summary:	Chemistry software file format converter
 Name:		openbabel
-Version:	2.4.1
-Release:	5
+Version:	3.1.1
+Release:	1
 License:	GPLv2+
 Group:		Sciences/Chemistry
 Url:		http://openbabel.org
@@ -39,9 +39,7 @@ Patch10: openbabel-fix-libdir-in-pkgconfig.patch
 Patch11: openbabel-disable-tests-s390x.patch
 # Fix inconsistent whitespace
 Patch12: openbabel-taberror.patch
-# Fix import of dl module in python3.7
-# https://github.com/openbabel/openbabel/pull/372
-Patch13: openbabel-python-dl.patch
+Patch13: openbabel-3.1.1-bug2493.patch
 
 BuildRequires:	cmake
 BuildRequires:	doxygen
@@ -54,7 +52,7 @@ BuildRequires:	ruby-devel
 BuildRequires:	rubygems
 %endif
 %if %{with wx}
-BuildRequires:	wxgtku3.0-devel
+BuildRequires:	wxgtk-devel
 %endif
 BuildRequires:	perl(ExtUtils::MakeMaker)
 BuildRequires:	pkgconfig(libxml-2.0)
@@ -150,10 +148,10 @@ Ruby wrapper for the Open Babel library.
 %ifarch s390x
 %patch11 -p1 -b .s390x
 %endif
-%patch9 -p1 -b .nc 
+#patch9 -p1 -b .nc 
 %patch10 -p1
-%patch12 -p1 -b .taberr
-%patch13 -p1 -b .py3dl
+#patch12 -p1 -b .taberr
+%patch13 -p1
 
 # remove hardcoded g++
 sed -i 's!g++!%{__cxx}!g' scripts/perl/Makefile.PL
@@ -175,6 +173,8 @@ popd
  -DPYTHON_BINDINGS:BOOL=ON \
  -DPERL_BINDINGS:BOOL=ON \
  -DRUBY_BINDINGS:BOOL=ON \
+ -DWITH_MAEPARSER:BOOL=OFF \
+ -DWITH_COORDGEN:BOOL=OFF \
  -DOPENBABEL_USE_SYSTEM_INCHI=OFF
 
 %make_build
@@ -215,8 +215,8 @@ mv  %{buildroot}%{_libdir}/_openbabel.so \
 
 %files -n %{devname}
 %{_includedir}/*
-%dir %{_libdir}/cmake/openbabel2
-%{_libdir}/cmake/openbabel2/*.cmake
+%dir %{_libdir}/cmake/openbabel3
+%{_libdir}/cmake/openbabel3/*.cmake
 %{_libdir}/pkgconfig/*.pc
 %{_libdir}/lib*.so
 
