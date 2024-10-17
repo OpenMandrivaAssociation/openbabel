@@ -14,7 +14,7 @@ Version:	3.1.1
 Release:	1
 License:	GPLv2+
 Group:		Sciences/Chemistry
-Url:		http://openbabel.org
+Url:		https://openbabel.org
 Source0:	https://github.com/openbabel/openbabel/archive/openbabel-%(echo %{version} |sed -e 's,\.,-,g').tar.gz
 
 # fix perl modules install path
