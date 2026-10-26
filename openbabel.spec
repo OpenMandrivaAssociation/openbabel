@@ -42,6 +42,7 @@ Patch12: openbabel-taberror.patch
 Patch13: openbabel-3.1.1-bug2493.patch
 
 BuildRequires:	cmake
+BuildRequires:	make
 BuildRequires:	doxygen
 BuildRequires:	eigen3
 BuildRequires:	swig
