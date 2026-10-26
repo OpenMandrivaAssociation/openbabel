@@ -167,6 +167,9 @@ for man in *.1; do
 done
 popd
 
+# CMake 4 no longer accepts CMP0042 OLD (MACOSX_RPATH).
+sed -i 's/cmake_policy(SET CMP0042 OLD)/cmake_policy(SET CMP0042 NEW)/' CMakeLists.txt
+
 %build
 %global CXXFLAGS %CXXFLAGS -std=c++98
 %cmake \
