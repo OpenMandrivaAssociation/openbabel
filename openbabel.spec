@@ -175,6 +175,9 @@ sed -i 's/cmake_policy(SET CMP0042 OLD)/cmake_policy(SET CMP0042 NEW)/' CMakeLis
 # Upstream fetches RapidJSON during cmake. Put the 1.1.0 tree where it looks.
 mkdir -p external
 tar -xf %{SOURCE1} -C external
+# 1.1.0 assigns to const members of GenericStringRef. Clang rejects that.
+sed -i 's/{ s = rhs.s; length = rhs.length; }/= delete;/' \
+	external/rapidjson-1.1.0/include/rapidjson/document.h
 
 %build
 %global CXXFLAGS %CXXFLAGS -std=c++98
