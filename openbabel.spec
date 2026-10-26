@@ -139,20 +139,20 @@ Ruby wrapper for the Open Babel library.
 
 %prep
 %setup -qn %{name}-%{name}-%(echo %{version}|sed -e 's,\.,-,g')
-%patch1 -p1 -b .perl_path
-%patch4 -p1 -b .plugindir
-%patch6 -p1 -b .noswig_ruby
-%patch7 -p1 -b .ruby_vendor
+%patch 1 -p1 -b .perl_path
+%patch 4 -p1 -b .plugindir
+%patch 6 -p1 -b .noswig_ruby
+%patch 7 -p1 -b .ruby_vendor
 %ifarch aarch64 %{arm} %{power64} s390 s390x
-%patch8 -p1 -b .tests
+%patch 8 -p1 -b .tests
 %endif
 %ifarch s390x
-%patch11 -p1 -b .s390x
+%patch 11 -p1 -b .s390x
 %endif
 #patch9 -p1 -b .nc 
-%patch10 -p1
+%patch 10 -p1
 #patch12 -p1 -b .taberr
-%patch13 -p1
+%patch 13 -p1
 
 # remove hardcoded g++
 sed -i 's!g++!%{__cxx}!g' scripts/perl/Makefile.PL
