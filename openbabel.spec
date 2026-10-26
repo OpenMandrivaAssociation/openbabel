@@ -11,7 +11,7 @@
 Summary:	Chemistry software file format converter
 Name:		openbabel
 Version:	3.1.1
-Release:	1
+Release:	2
 License:	GPLv2+
 Group:		Sciences/Chemistry
 Url:		https://openbabel.org
