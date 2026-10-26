@@ -16,6 +16,8 @@ License:	GPLv2+
 Group:		Sciences/Chemistry
 Url:		https://openbabel.org
 Source0:	https://github.com/openbabel/openbabel/archive/openbabel-%(echo %{version} |sed -e 's,\.,-,g').tar.gz
+# CMake downloads this at configure time. Builders have no network.
+Source1:	rapidjson-1.1.0.tar.gz
 
 # fix perl modules install path
 Patch1: %{name}-perl.patch
@@ -169,6 +171,10 @@ popd
 
 # CMake 4 no longer accepts CMP0042 OLD (MACOSX_RPATH).
 sed -i 's/cmake_policy(SET CMP0042 OLD)/cmake_policy(SET CMP0042 NEW)/' CMakeLists.txt
+
+# Upstream fetches RapidJSON during cmake. Put the 1.1.0 tree where it looks.
+mkdir -p external
+tar -xf %{SOURCE1} -C external
 
 %build
 %global CXXFLAGS %CXXFLAGS -std=c++98
